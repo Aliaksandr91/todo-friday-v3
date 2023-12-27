@@ -1,5 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AppThunk} from "app/store";
+import {createSlice} from "@reduxjs/toolkit";
 import {appActions} from "app/app.reducer";
 import {authAPI, LoginParamsType} from "features/auth/auth.api";
 import {clearTasksAndTodolists} from "common/actions";
@@ -84,6 +83,7 @@ const initializeApp = createAppAsyncThunk<{
             return {isLoggedIn: true}
         } else {
             //TODO
+            //handleServerAppError(res.data, dispatch);
             return rejectWithValue(null);
         }
     } catch (e) {
@@ -96,4 +96,3 @@ const initializeApp = createAppAsyncThunk<{
 
 export const authThunks = {login, logout, initializeApp}
 export const authReducer = slice.reducer;
-export const authActions = slice.actions;
