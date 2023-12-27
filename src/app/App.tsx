@@ -12,15 +12,15 @@ import {
   Typography,
 } from "@mui/material";
 import { Menu } from "@mui/icons-material";
-import { initializeAppTC } from "app/app.reducer";
 import { Login } from "features/auth/Login";
-import { logoutTC } from "features/auth/auth.reducer";
+
 import "./App.css";
 import { TodolistsList } from "features/TodolistsList/TodolistsList";
 import { ErrorSnackbar } from "common/components";
 import { useAppDispatch } from "common/hooks";
 import { selectIsLoggedIn } from "features/auth/auth.selectors";
 import { selectAppStatus, selectIsInitialized } from "app/app.selectors";
+import {authThunks} from "features/auth/auth.reducer";
 
 function App() {
   const status = useSelector(selectAppStatus);
@@ -30,11 +30,11 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(initializeAppTC());
+    dispatch(authThunks.initializeApp());
   }, []);
 
   const logoutHandler = useCallback(() => {
-    dispatch(logoutTC());
+    dispatch(authThunks.logout());
   }, []);
 
   if (!isInitialized) {
