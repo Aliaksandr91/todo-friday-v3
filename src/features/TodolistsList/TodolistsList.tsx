@@ -17,9 +17,17 @@ export const TodolistsList = () => {
     const tasks = useSelector(selectTasks);
     const isLoggedIn = useSelector(selectIsLoggedIn);
 
-    const {removeTodolist, addTodolist, fetchTodolists, changeTodolistTitle} = useActions(todolistsThunks)
-    const { addTask, removeTask, updateTask} = useActions(tasksThunks)
-    const { changeTodolistFilter} = useActions(todolistsActions)
+    const {
+        removeTodolist,
+        addTodolist,
+        fetchTodolists,
+        changeTodolistTitle,
+        addTask,
+        removeTask,
+        updateTask,
+        changeTodolistFilter
+    } = useActions({...todolistsThunks, ...tasksThunks, ...todolistsActions})
+
     useEffect(() => {
         if (!isLoggedIn) {
             return;
